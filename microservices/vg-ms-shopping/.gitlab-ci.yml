@@ -1,0 +1,41 @@
+stages:
+  - test
+  - docker
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+  # Nombre de la imagen que se publicará en Docker Hub
+  DOCKER_IMAGE: "vg-ms-shopping"
+
+# Caché del repositorio local de Maven para acelerar compilaciones
+cache:
+  paths:
+    - .m2/repository
+
+test:
+  stage: test
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    # Compila y verifica el código sin ejecutar tests de integración (requieren BD externa)
+    - mvn -q package -DskipTests
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+docker_build_push:
+  stage: docker
+  image: docker:27.3.1
+  services:
+    - docker:27.3.1-dind
+  script:
+    # Validar que las variables de Docker Hub estén configuradas en GitLab CI/CD
+    - test -n "$DKH_USERNAME"
+    - test -n "$DKH_TOKEN"
+    - printf "%s" "$DKH_TOKEN" | docker login -u "$DKH_USERNAME" --password-stdin
+    - docker build -t "$DKH_USERNAME/$DOCKER_IMAGE:latest" .
+    - docker push "$DKH_USERNAME/$DOCKER_IMAGE:latest"
+  rules:
+    # Solo construye y publica en ramas principales
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
