@@ -1,0 +1,23 @@
+server:
+  port: 9094
+  compression:
+    enabled: true
+
+spring:
+  application:
+    name: ms-therapies
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb+srv://snayder:Snayder123@cluster0.1jsaw0p.mongodb.net/therapies_db}
+      auto-index-creation: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG

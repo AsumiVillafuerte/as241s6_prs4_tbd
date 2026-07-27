@@ -1,0 +1,23 @@
+server:
+  port: 9094
+  compression:
+    enabled: true
+
+spring:
+  application:
+    name: ms-therapies
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI}
+      auto-index-creation: ${SPRING_DATA_MONGODB_AUTO_INDEX_CREATION:true}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    pe.edu.vallegrande: INFO
