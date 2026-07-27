@@ -1,0 +1,25 @@
+services:
+
+  ms-product-sale:
+    image: asumi27/ms-product-sale:latest
+    container_name: ms-product-sale-service
+
+    environment:
+
+      SPRING_R2DBC_URL: r2dbc:postgresql://ep-fancy-frog-ait4v8pt-pooler.c-4.us-east-1.aws.neon.tech/product_sale_db?sslmode=require&channel_binding=require
+      SPRING_R2DBC_USERNAME: neondb_owner
+      SPRING_R2DBC_PASSWORD: npg_oC1uAFIyb5SK
+
+      PATIENTS_SERVICE_URL: https://lab.vallegrande.edu.pe/sigrc/gateway
+      USERS_SERVICE_URL: https://lab.vallegrande.edu.pe/sigrc/gateway
+      PRODUCTS_SERVICE_URL: https://lab.vallegrande.edu.pe/sigrc/gateway
+
+    ports:
+      - "9098:9098"
+
+    networks:
+      - product-sale-network
+
+networks:
+  product-sale-network:
+    driver: bridge
