@@ -1,0 +1,30 @@
+# Maven
+/target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# Logs and temp files
+*.log
+*.tmp
+*~
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+.env
