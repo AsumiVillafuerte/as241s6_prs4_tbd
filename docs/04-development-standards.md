@@ -101,3 +101,13 @@ Durante la revision se comprobara que:
 - Los cambios no afecten el funcionamiento de otros modulos del sistema.
 
 Una vez aprobada la revision, el Pull Request sera fusionado con la rama main y la rama de trabajo sera eliminada para mantener el repositorio limpio y organizado.
+
+---
+
+## 6. Estructura base del microservicio
+
+Todo nuevo microservicio debe partir de la plantilla ubicada en [`templates/vg-ms-architecture`](../templates/vg-ms-architecture/README.md), que define la organizacion de carpetas de la Arquitectura Hexagonal (`domain`, `application`, `infrastructure`) usada por el equipo. Esto evita que cada integrante proponga una estructura distinta y mantiene la uniformidad exigida en las buenas practicas.
+
+## 7. Variables de entorno
+
+Cada microservicio debe incluir un archivo `.env.example` en la raiz con las variables necesarias para ejecutarlo (conexion a base de datos, puertos, URL del API Gateway, etc.), sin valores reales ni credenciales. El archivo `.env` con los valores reales nunca debe subirse al repositorio (debe estar en `.gitignore`).
