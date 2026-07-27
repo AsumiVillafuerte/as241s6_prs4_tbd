@@ -6,6 +6,10 @@ El flujo arquitectónico sigue un patrón de **microservicios** donde el usuario
 
 Cada microservicio es independiente y se comunica directamente con su propia base de datos, ya sea **PostgreSQL** para datos relacionales o **MongoDB** para datos NoSQL. El API Gateway actúa como punto único de entrada, orquestando la comunicación entre el cliente y los 16 microservicios que conforman el sistema.
 
+### API Gateway
+
+El API Gateway **no es un microservicio propio del equipo**: es un gateway externo provisto por el laboratorio de Vallegrande, disponible en `https://lab.vallegrande.edu.pe/sigrc/gateway`. Cada microservicio consume a los demás a través de esta URL base (configurada mediante variables de entorno, ej. `PATIENTS_SERVICE_URL`, `USERS_SERVICE_URL`), en lugar de llamarse directamente entre sí.
+
 ## Flujo de la Arquitectura
 
 ```
@@ -112,8 +116,8 @@ Cada microservicio es independiente y se comunica directamente con su propia bas
 |                  | consultar citas por paciente, medico y             |           |      |                       |
 |                  | especialidad.                                      |           |      |                       |
 +------------------+----------------------------------------------------+-----------+------+-----------------------+
-| ms-medical-hist  | Administracion del historial clinico de cada       | PostgreSQL| 9091 | Jesus Huaripaucar     |
-|                  | paciente: diagnosticos, antecedentes,              |           |      |                       |
+| ms-medical-      | Administracion del historial clinico de cada       | PostgreSQL| 9091 | Jesus Huaripaucar     |
+| history          | paciente: diagnosticos, antecedentes,              |           |      |                       |
 |                  | tratamientos, observaciones y evolucion clinica.   |           |      |                       |
 +------------------+----------------------------------------------------+-----------+------+-----------------------+
 | ms-treatments    | Registra los tratamientos asignados a pacientes    | MongoDB   | 9092 | Jesus Sanchez         |
