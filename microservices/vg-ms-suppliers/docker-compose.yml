@@ -1,0 +1,25 @@
+services:
+  vg-ms-sigrc-suppliers:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVER_PORT: ${SERVER_PORT:-8082}
+    image: marilynvilcapuma/ms-suppliers:latest
+    container_name: vg-ms-sigrc-suppliers
+    pull_policy: always
+    mem_limit: 500m
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-8082}:${SERVER_PORT:-8082}"
+    environment:
+      SERVER_PORT: ${SERVER_PORT:-8082}
+      SPRING_R2DBC_URL: ${SPRING_R2DBC_URL}
+      SPRING_R2DBC_USERNAME: ${SPRING_R2DBC_USERNAME}
+      SPRING_R2DBC_PASSWORD: ${SPRING_R2DBC_PASSWORD}
+    networks:
+      - suppliers-network
+
+networks:
+  suppliers-network:
+    driver: bridge
