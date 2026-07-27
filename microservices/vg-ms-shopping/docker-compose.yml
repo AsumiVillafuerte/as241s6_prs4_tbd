@@ -1,0 +1,29 @@
+services:
+  vg-ms-shopping:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVER_PORT: ${SERVER_PORT:-9096}
+    image: marilynvilcapuma/vg-ms-shopping:latest
+    container_name: vg-ms-shopping
+    pull_policy: always
+    mem_limit: 270m
+    cpus: '1.0'
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-9096}:${SERVER_PORT:-9096}"
+    environment:
+      SERVER_PORT: ${SERVER_PORT:-9096}
+      # Conexión a base de datos PostgreSQL en Neon Cloud
+      SPRING_R2DBC_URL: ${SPRING_R2DBC_URL}
+      SPRING_R2DBC_USERNAME: ${SPRING_R2DBC_USERNAME}
+      SPRING_R2DBC_PASSWORD: ${SPRING_R2DBC_PASSWORD}
+      # Gateway externo que enruta a ms-suppliers, ms-medications y ms-users
+      GATEWAY_URL: ${GATEWAY_URL:-https://lab.vallegrande.edu.pe/sigrc/gateway}
+    networks:
+      - shopping-network
+
+networks:
+  shopping-network:
+    driver: bridge

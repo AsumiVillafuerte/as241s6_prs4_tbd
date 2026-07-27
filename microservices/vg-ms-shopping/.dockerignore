@@ -1,0 +1,24 @@
+# Archivos de control de versiones
+.git
+.gitignore
+
+# Directorio de compilación (el build se hace dentro del contenedor)
+target/
+
+# Configuración del IDE
+.idea/
+*.iml
+.vscode/
+
+# Archivos de entorno local
+.env
+*.env
+
+# Documentación y archivos de ayuda
+HELP.md
+*.md
+
+# Docker compose y Dockerfile (no se necesitan dentro de la imagen)
+docker-compose*.yml
+Dockerfile*
+.dockerignore
