@@ -1,0 +1,18 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: ms-specialties
+  data:
+    mongodb:
+      uri: mongodb+srv://snayder:Snayder123@cluster0.1jsaw0p.mongodb.net/specialties_db
+      auto-index-creation: true
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+    

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  ms-specialties:
+    image: cardenastrujilloalonso/ms-specialties:latest
+    container_name: ms-specialties
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATA_MONGODB_URI=${SPRING_DATA_MONGODB_URI:mongodb+srv://snayder:Snayder123@cluster0.1jsaw0p.mongodb.net/specialties_db}
+      - SPRING_DATA_MONGODB_AUTO_INDEX_CREATION=true
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 300M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    restart: unless-stopped
