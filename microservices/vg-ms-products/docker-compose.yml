@@ -1,0 +1,15 @@
+services:
+
+  ms-products:
+    image: asumi27/ms-products:latest
+    container_name: ms-products-service
+
+    ports:
+      - "8086:8086"
+   
+    networks:
+      - products-network
+
+networks:
+  products-network:
+    driver: bridge
