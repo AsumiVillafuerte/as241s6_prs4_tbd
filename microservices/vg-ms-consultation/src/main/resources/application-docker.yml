@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:9093}
+  compression:
+    enabled: true
+
+spring:
+  application:
+    name: ms-consultation
+  r2dbc:
+    url: ${SPRING_R2DBC_URL}
+    username: ${SPRING_R2DBC_USERNAME}
+    password: ${SPRING_R2DBC_PASSWORD}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    pe.edu.vallegrande: INFO
