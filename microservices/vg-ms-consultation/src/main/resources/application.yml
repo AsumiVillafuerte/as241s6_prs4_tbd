@@ -1,0 +1,26 @@
+server:
+  port: 9093
+  compression:
+    enabled: true
+
+spring:
+  application:
+    name: ms-consultation
+  r2dbc:
+    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://ep-falling-dew-aq2lg9wv-pooler.c-8.us-east-1.aws.neon.tech/consultation?sslmode=require}
+    username: ${SPRING_R2DBC_USERNAME:neondb_owner}
+    password: ${SPRING_R2DBC_PASSWORD:npg_JobSPW0hn4Bp}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
