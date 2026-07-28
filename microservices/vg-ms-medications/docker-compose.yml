@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  ms-medications:
+    image: luisrivas3/ms-medications:latest
+    container_name: ms-medications
+    ports:
+      - "8088:8088"
+    environment:
+      SERVER_PORT: 8088
+      MONGODB_URI: mongodb+srv://luisrivas:Alexander1903@cluster0.gr4avuk.mongodb.net/ms-medications?appName=Cluster0
+    restart: unless-stopped

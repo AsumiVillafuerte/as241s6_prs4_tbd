@@ -1,0 +1,36 @@
+stages:
+  - test
+  - docker
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+  DOCKER_IMAGE: "ms-medications"
+
+cache:
+  paths:
+    - .m2/repository
+
+test:
+  stage: test
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    - mvn -q test
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+docker_build_push:
+  stage: docker
+  image: docker:27.3.1
+  services:
+    - docker:27.3.1-dind
+  script:
+    - test -n "$DOCKER_USERNAME"
+    - test -n "$DOCKER_PASSWORD"
+    - printf "%s" "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker build -t "$DOCKER_USERNAME/$DOCKER_IMAGE:latest" .
+    - docker push "$DOCKER_USERNAME/$DOCKER_IMAGE:latest"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"

@@ -1,0 +1,14 @@
+server:
+  port: ${SERVER_PORT:8088}
+
+spring:
+  application:
+    name: ms-medications
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb+srv://luisrivas:Alexander1903@cluster0.gr4avuk.mongodb.net/ms-medications?appName=Cluster0}
+      auto-index-creation: true
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
