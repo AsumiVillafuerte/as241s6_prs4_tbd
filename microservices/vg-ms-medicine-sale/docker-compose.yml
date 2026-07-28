@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  ms-medicine-sale:
+    image: luisrivas3/ms-medicine-sale:latest
+    container_name: ms-medicine-sale
+    ports:
+      - "9097:9097"
+    environment:
+      SERVER_PORT: 9097
+      MONGODB_URI: mongodb+srv://luisrivas:Alexander1903@cluster0.gr4avuk.mongodb.net/ms-medicine-sale?appName=Cluster0
+    restart: unless-stopped

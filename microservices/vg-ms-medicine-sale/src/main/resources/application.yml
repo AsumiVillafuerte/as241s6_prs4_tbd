@@ -1,0 +1,28 @@
+server:
+  port: ${SERVER_PORT:9097}
+
+spring:
+  application:
+    name: ms-medicine-sale
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb+srv://luisrivas:Alexander1903@cluster0.gr4avuk.mongodb.net/ms-medicine-sale?appName=Cluster0}
+      auto-index-creation: true
+
+clients:
+  medications:
+    url: ${MEDICATIONS_SERVICE_URL:https://lab.vallegrande.edu.pe/sigrc/gateway}
+  patients:
+    url: ${PATIENTS_SERVICE_URL:https://lab.vallegrande.edu.pe/sigrc/gateway}
+  users:
+    url: ${USERS_SERVICE_URL:https://lab.vallegrande.edu.pe/sigrc/gateway}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
